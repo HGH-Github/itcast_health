@@ -24,4 +24,6 @@
         <constructor-arg name="port" value="${redis.port}" type="int" />
         <constructor-arg name="timeout" value="${redis.timeout}" type="int" />
     </bean>
+
+    <bean id="objectMapper" class="com.fasterxml.jackson.databind.ObjectMapper"/>
 </beans>

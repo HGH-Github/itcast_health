@@ -57,4 +57,18 @@ public class MemberServiceImpl implements MemberService {
         }
         return memberCount;
     }
+
+    @Override
+    public List<Integer> getMemberReportDateRange(List<String> months) {
+        List<Integer> memberCount=new ArrayList<>();
+
+        if (months!=null){
+            for (String month : months) {
+                Integer count=memberDao.findMemberCountBeforeDate(month+"-31");
+                memberCount.add(count);
+            }
+        }
+
+        return memberCount;
+    }
 }
