@@ -9,7 +9,7 @@
     <security:http pattern="/js/**" security="none"/>
     <security:http pattern="/plugins/**" security="none"/>
     <security:http pattern="/login.html" security="none"/>
-
+    <security:http pattern="/orle.html" security="none"/>
     <!--
    拦截规则
        autoconfig userexpress
@@ -24,7 +24,7 @@
                              login-processing-url="/login.do"
                              username-parameter="username"
                              password-parameter="password"
-                             default-target-url="/pages/main.html"
+                             default-target-url="/pages/role.html"
                              always-use-default-target="true"/>
         <security:headers>
 <!--   frame-options 控制页面中嵌套frame（访问其它页面，把其它页面的内容展示在这个页面上)
