@@ -6,6 +6,7 @@ import com.itheima.health.entity.Result;
 import com.itheima.health.service.MemberService;
 import com.itheima.health.service.ReportService;
 import com.itheima.health.service.SetmealService;
+import com.itheima.health.utils.DateUtils;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -13,9 +14,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.jxls.common.Context;
 import org.jxls.transform.poi.PoiContext;
 import org.jxls.util.JxlsHelper;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -43,6 +42,36 @@ public class ReportController {
 
     @Reference
     private ReportService reportService;
+
+
+    @PostMapping("/getMemberReportDateRange")
+    public Result getMemberReportDateRange(@RequestBody Date[] dateRange){
+        //先将两个日期进行切割,获得开始日期和结束日期
+        Date startDate=dateRange[0];
+        Date endDate=dateRange[1];
+
+        Map<String,Object> resultMap=null;
+        try {
+            //获得
+            List<String> months = DateUtils.getMonthBetween(DateUtils.parseDate2String(startDate),DateUtils.parseDate2String(endDate), "yyyy-MM");
+
+            //调用service层
+            List<Integer> memberCount=memberService.getMemberReportDateRange(months);
+
+            //存进map集合中
+            resultMap=new HashMap<>();
+            resultMap.put("months",months);
+            resultMap.put("memberCount",memberCount);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //转换两个日期对象，获得精确到月份的数据
+
+        return new Result(true,MessageConstant.GET_MEMBER_NUMBER_REPORT_SUCCESS,resultMap);
+
+    }
 
     /**
      * 会员拆线图

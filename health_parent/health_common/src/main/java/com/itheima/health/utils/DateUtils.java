@@ -285,7 +285,7 @@ public class DateUtils {
         return calendar.getTime();
     }
 
-    //获得本月一日的日期
+    //获得本月最后一日的日期
     public static Date getLastDayOfThisMonth(){
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.DAY_OF_MONTH,1);

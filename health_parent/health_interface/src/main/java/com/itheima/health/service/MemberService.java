@@ -28,4 +28,11 @@ public interface MemberService {
      * @return
      */
     List<Integer> getMemberReport(List<String> months);
+
+    /**
+     * 统计指定日期时间段内的会员数量
+     * @param months
+     * @return
+     */
+    List<Integer> getMemberReportDateRange(List<String> months);
 }
