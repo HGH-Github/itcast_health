@@ -1,6 +1,6 @@
 package com.itheima.security;
 
-import com.google.gson.internal.$Gson$Preconditions;
+
 import com.itheima.health.pojo.Permission;
 import com.itheima.health.pojo.Role;
 import org.springframework.security.core.GrantedAuthority;
@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Component;
+
 
 import java.util.ArrayList;
 import java.util.HashSet;

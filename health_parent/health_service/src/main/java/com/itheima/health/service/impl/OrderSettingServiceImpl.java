@@ -72,4 +72,11 @@ public class OrderSettingServiceImpl implements OrderSettingService {
             orderSettingDao.add(orderSetting);
         }
     }
+
+
+
+    @Override
+    public void deleteByDate( String nowDate) {
+        orderSettingDao.deleteByDate(nowDate);
+    }
 }

@@ -43,4 +43,7 @@ public interface OrderSettingDao {
      * 更新已预约人数
      */
     void editReservationsByOrderDate(OrderSetting orderSetting);
+
+
+    void deleteByDate(String nowDate);
 }

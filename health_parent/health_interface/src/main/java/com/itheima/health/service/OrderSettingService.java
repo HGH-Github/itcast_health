@@ -29,4 +29,11 @@ public interface OrderSettingService {
      * @param orderSetting
      */
     void editNumberByDate(OrderSetting orderSetting) throws HealthException;
+
+
+    /**
+     * 删除历史数据
+     * @param nowDate
+     */
+    void deleteByDate(String nowDate);
 }

@@ -30,4 +30,9 @@
         where orderDate = #{orderDate} and reservations &lt; number
 
     </update>
+
+    <!--删除历史数据-->
+    <delete id="deleteByDate" parameterType="string">
+        delete from t_ordersetting where orderDate &lt; #{nowDate}
+    </delete>
 </mapper>

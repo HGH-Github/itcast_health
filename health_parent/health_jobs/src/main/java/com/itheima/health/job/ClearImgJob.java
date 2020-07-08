@@ -1,12 +1,16 @@
 package com.itheima.health.job;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.itheima.health.constant.RedisConstant;
+import com.itheima.health.service.OrderSettingService;
 import com.itheima.health.utils.QiNiuUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Set;
 
 /**
@@ -24,6 +28,8 @@ public class ClearImgJob {
     @Autowired
     private JedisPool jedisPool;
 
+    @Reference
+    private OrderSettingService orderSettingService;
     /**
      * 清理垃圾图片的执行方法
      */
@@ -37,5 +43,18 @@ public class ClearImgJob {
         QiNiuUtils.removeFiles(need2Delete.toArray(new String[]{}));
         // 删除redis上的图片, 两边的图片已经同步了
         jedis.del(RedisConstant.SETMEAL_PIC_RESOURCES, RedisConstant.SETMEAL_PIC_DB_RESOURCES);
+    }
+
+    /**
+     * 每月最后一天凌晨两点定时清理
+     */
+    public void clearOrderSetting(){
+        //获取当前时间
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String nowDate = sdf.format(date);
+        //调用service层删除历史数据
+        System.out.println(123);
+        orderSettingService.deleteByDate(nowDate);
     }
 }
