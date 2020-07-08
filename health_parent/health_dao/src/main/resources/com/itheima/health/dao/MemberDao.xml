@@ -95,4 +95,20 @@
     <select id="findMemberTotalCount" resultType="int">
         select count(id) from t_member
     </select>
+
+	<select id="findmenberCount" resultType="map">
+        select count(1) value ,sex name from t_member group by sex;
+    </select>
+
+    <select id="findCountByage"  parameterType="int" resultType="int">
+        SELECT COUNT(1) FROM
+        (SELECT TIMESTAMPDIFF(YEAR,birthday,DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%S')) age  FROM t_member) t
+        WHERE t.age BETWEEN #{a} AND #{b}
+    </select>
+
+    <select id="findCountByage2" parameterType="int" resultType="int">
+        SELECT COUNT(1) FROM
+        (SELECT TIMESTAMPDIFF(YEAR,birthday,DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%S')) age  FROM t_member) t
+        WHERE t.age not between #{a} and #{d}
+	</select>
 </mapper>

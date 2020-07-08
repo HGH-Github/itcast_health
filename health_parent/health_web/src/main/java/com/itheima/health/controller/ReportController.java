@@ -6,7 +6,6 @@ import com.itheima.health.entity.Result;
 import com.itheima.health.service.MemberService;
 import com.itheima.health.service.ReportService;
 import com.itheima.health.service.SetmealService;
-import com.itheima.health.utils.DateUtils;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -14,7 +13,10 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.jxls.common.Context;
 import org.jxls.transform.poi.PoiContext;
 import org.jxls.util.JxlsHelper;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -266,5 +268,74 @@ public class ReportController {
             e.printStackTrace();
         }
         return new Result(false,"导出运营数据统计pdf失败");
+    }
+
+	@GetMapping("getmembersexReport")
+    public Result getmembersexReport(){
+       List<Map<Object,Object>> memberCount=memberService.findmenberCount();
+
+        List<String> sexNames = new ArrayList<String>();
+        if(null != memberCount){
+            for (Map<Object, Object> Map : memberCount) {
+               if (Map.get("name").equals("1")){
+                   Map.put("name", "男");
+                   sexNames.add("男");
+                   System.out.println(Map);
+            }else if (Map.get("name").equals("2")){
+                   Map.put("name", "女");
+                   sexNames.add("女");
+                   System.out.println(Map);
+               }
+            }
+
+        }
+        // 封装返回的结果
+        Map<String,Object> resultMap = new HashMap<String,Object>();
+        resultMap.put("sexNames",sexNames);
+        resultMap.put("memberCount",memberCount);
+
+       return new Result(true, "查询成功",resultMap);
+    }
+    @RequestMapping("getageReport")
+    public Result getageReport(){
+        int a=0;
+        int b=18;
+        int c=30;
+        int d=45;
+        Map<Object,Object>map1 =new HashMap<>();
+        map1.put("name", a+"-"+b+"岁");
+        map1.put("value", memberService.findCountByage(a, b));
+
+        Map<Object,Object>map2 =new HashMap<>();
+        map2.put("name", b+"-"+c+"岁");
+        map2.put("value", memberService.findCountByage(b, c));
+
+
+        Map<Object,Object>map3 =new HashMap<>();
+        map3.put("name", c+"-"+d+"岁");
+        map3.put("value", memberService.findCountByage(c, d));
+
+        Map<Object,Object>map4 =new HashMap<>();
+        map4.put("name", d+"岁以上");
+        map4.put("value", memberService.findCountByage2(a,d));
+
+        List<Map>memberCount=new ArrayList<>();
+        memberCount.add(map1);
+        memberCount.add(map2);
+        memberCount.add(map3);
+        memberCount.add(map4);
+
+        List<String> ageGroup =new ArrayList<>();
+        ageGroup.add((String) map1.get("name"));
+        ageGroup.add( (String) map2.get("name"));
+        ageGroup.add( (String) map3.get("name"));
+        ageGroup.add((String) map4.get("name"));
+
+        Map<Object,Object> resultMap = new HashMap<Object,Object>();
+        resultMap.put("ageGroup",ageGroup );
+        resultMap.put("memberCount",memberCount);
+        return new Result(true, "查询成功",resultMap);
+
+
     }
 }

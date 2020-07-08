@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Description: No Description
@@ -70,5 +71,20 @@ public class MemberServiceImpl implements MemberService {
         }
 
         return memberCount;
+    }
+
+	@Override
+    public List<Map<Object, Object>> findmenberCount() {
+        return memberDao.findmenberCount();
+    }
+
+    @Override
+    public int findCountByage(int a ,int b) {
+        return memberDao.findCountByage(a,b);
+    }
+
+    @Override
+    public int findCountByage2(int a,int d) {
+      return   memberDao.findCountByage2(a,d);
     }
 }
