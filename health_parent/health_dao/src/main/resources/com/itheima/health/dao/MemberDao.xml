@@ -97,7 +97,7 @@
     </select>
 
 	<select id="findmenberCount" resultType="map">
-        select count(1) value ,sex name from t_member group by sex;
+        select count(1) value ,sex name from t_member where sex="1"or sex="2" group  by sex;
     </select>
 
     <select id="findCountByage"  parameterType="int" resultType="int">

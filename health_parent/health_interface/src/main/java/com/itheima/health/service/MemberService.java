@@ -36,7 +36,7 @@ public interface MemberService {
      */
     List<Integer> getMemberReportDateRange(List<String> months);
 
-    List<Map<Object, Object>> findmenberCount();
+    List<Map<String, Object>> findmenberCount();
 
     int findCountByage(int a ,int b);
 

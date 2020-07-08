@@ -2,6 +2,7 @@ package com.itheima.health.dao;
 
 import com.github.pagehelper.Page;
 import com.itheima.health.pojo.Member;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -19,8 +20,8 @@ public interface MemberDao {
     Integer findMemberCountAfterDate(String date);
     Integer findMemberTotalCount();
 	
-    List<Map<Object, Object>> findmenberCount();
-    int findCountByage(@Param("a") int a,@Param("b") int b);
+    List<Map<String, Object>> findmenberCount();
+    int findCountByage(@Param("a") int a, @Param("b") int b);
     int findCountByage2(@Param("a") int a,@Param("d") int d);
 
 }

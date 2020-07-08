@@ -6,6 +6,7 @@ import com.itheima.health.entity.Result;
 import com.itheima.health.service.MemberService;
 import com.itheima.health.service.ReportService;
 import com.itheima.health.service.SetmealService;
+import com.itheima.health.utils.DateUtils;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -13,9 +14,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.jxls.common.Context;
 import org.jxls.transform.poi.PoiContext;
 import org.jxls.util.JxlsHelper;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 import javax.servlet.http.HttpServletRequest;
@@ -272,18 +271,20 @@ public class ReportController {
 
 	@GetMapping("getmembersexReport")
     public Result getmembersexReport(){
-       List<Map<Object,Object>> memberCount=memberService.findmenberCount();
-
+       List<Map<String,Object>> memberCount=memberService.findmenberCount();
+        System.out.println(memberCount);
         List<String> sexNames = new ArrayList<String>();
+        sexNames.add("男");
+        sexNames.add("女");
         if(null != memberCount){
-            for (Map<Object, Object> Map : memberCount) {
-               if (Map.get("name").equals("1")){
-                   Map.put("name", "男");
-                   sexNames.add("男");
-                   System.out.println(Map);
-            }else if (Map.get("name").equals("2")){
-                   Map.put("name", "女");
-                   sexNames.add("女");
+            for (Map<String, Object> Map : memberCount) {
+                if (Map.get("name").equals("1")){
+                    Map.put("name", "男");
+
+                    System.out.println(Map);
+                }else if (Map.get("name").equals("2")){
+                    Map.put("name", "女");
+
                    System.out.println(Map);
                }
             }

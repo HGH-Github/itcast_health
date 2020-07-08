@@ -12,6 +12,8 @@ public interface UserDao {
 
     User findUserByUsername(String username);
 
+    User findByUsername(String username);
+
     List<Menu> findMenuListByUserId(Integer id);
 
     List<Menu> findMenuListLevel2ByMenuId(Integer id);

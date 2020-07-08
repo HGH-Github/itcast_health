@@ -23,13 +23,20 @@ import java.util.Map;
 public class UserServiceImpl implements UserService{
 
     @Autowired
-    UserDao userDao;
+    private UserDao userDao;
+
+    @Override
+    public User findByUsername(String username) {
+        User user = userDao.findByUsername(username);
+        return user;
+    }
 
     @Override
     public User findUserByUsername(String username) {
-        User user = userDao.findUserByUsername(username);
+        User user = userDao.findByUsername(username);
         return user;
     }
+
 
     @Override
     public List<Map<String, Object>> getMenuList(String username) {

@@ -8,6 +8,8 @@ import java.util.Map;
 
 public interface UserService {
 
+    User findByUsername(String username);
+
     User findUserByUsername(String username);
 
     List<Map<String, Object>> getMenuList(String username);

@@ -1,4 +1,4 @@
-﻿package com.itheima.health.constant;
+package com.itheima.health.constant;
 
 /**
  * 消息常量

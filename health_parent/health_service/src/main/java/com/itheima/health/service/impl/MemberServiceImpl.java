@@ -74,7 +74,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
 	@Override
-    public List<Map<Object, Object>> findmenberCount() {
+    public List<Map<String, Object>> findmenberCount() {
         return memberDao.findmenberCount();
     }
 
