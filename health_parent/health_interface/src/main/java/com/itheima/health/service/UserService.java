@@ -1,16 +1,26 @@
 package com.itheima.health.service;
 
+import com.itheima.health.entity.PageResult;
 import com.itheima.health.pojo.User;
 
-/**
- * Description: 用户服务(企业员工)
- * User: Eric
- */
+import java.util.List;
+import java.util.Map;
+
 public interface UserService {
-    /**
-     * 根据登陆用户名称查询用户权限信息
-     * @param username
-     * @return
-     */
-    User findByUsername(String username);
+
+    User findUserByUsername(String username);
+
+    List<Map<String, Object>> getMenuList(String username);
+
+    PageResult findPage(Integer currentPage, Integer pageSize, String queryString);
+
+    User findById(Integer id);
+
+    List<Integer> findRoleIdsByUserId(Integer id);
+
+    void add(User user, Integer[] permissionIds);
+
+    void edit(User user, Integer[] roleIds);
+
+    void deleteById(Integer id);
 }

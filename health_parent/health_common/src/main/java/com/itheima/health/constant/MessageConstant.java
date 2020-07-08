@@ -1,4 +1,4 @@
-package com.itheima.health.constant;
+﻿package com.itheima.health.constant;
 
 /**
  * 消息常量
@@ -79,4 +79,12 @@ public interface MessageConstant {
     static final String GET_PERMISSION_SUCCESS ="获取当前权限信息失败" ;
     static final String EDIT_PERMISSION_FAIL = "编辑权限失败";
     static final String EDIT_PERMISSION_SUCCESS = "编辑权限成功";
+    static final String QUERY_USER_SUCCESS="查询用户列表成功";
+    static final String QUERY_USER_FAIL="查询用户列表失败";
+    static final String ADD_USER_SUCCESS = "用户添加成功";
+    static final String ADD_USER_FAIL = "用户添加失败";
+    static final String EDIT_USER_SUCCESS = "编辑用户成功";
+    static final String EDIT_USER_FAIL = "编辑用户失败";
+    static final String DELETE_USER_SUCCESS = "删除用户成功";
+    static final String DELETE_USER_FAIL = "删除用户成功";
 }
