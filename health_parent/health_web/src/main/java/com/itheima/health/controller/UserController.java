@@ -59,7 +59,7 @@ public class UserController {
 
     // 分页查询用户列表
     @RequestMapping(value = "/findPage")
-    @PreAuthorize(value = "hasAuthority('USER_QUERY')")
+    //@PreAuthorize(value = "hasAuthority('USER_QUERY')")
     public PageResult findPage(@RequestBody QueryPageBean queryPageBean){
         PageResult pageResult = userService.findPage(queryPageBean.getCurrentPage(),
                 queryPageBean.getPageSize(),
