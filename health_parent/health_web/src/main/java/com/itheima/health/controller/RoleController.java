@@ -83,4 +83,15 @@ public class RoleController {
             return new Result ( true,"角色删除成功" );
 
     }
+
+    @RequestMapping(value = "/findAll")
+    public Result findAll(){
+        List<Role> list = roleService.findAll();
+        if(list!=null && list.size()>0){
+            return new Result(true, MessageConstant.QUERY_USER_SUCCESS,list);
+        }
+        else{
+            return new Result(false,MessageConstant.QUERY_USER_FAIL);
+        }
+    }
 }

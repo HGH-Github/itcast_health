@@ -3,10 +3,12 @@ package com.itheima.health.service.impl;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.itheima.health.dao.MenuDao;
 import com.itheima.health.dao.UserDao;
 import com.itheima.health.entity.PageResult;
 import com.itheima.health.pojo.CheckItem;
 import com.itheima.health.pojo.Menu;
+import com.itheima.health.pojo.Role;
 import com.itheima.health.pojo.User;
 import com.itheima.health.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,9 @@ public class UserServiceImpl implements UserService{
 
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private MenuDao menuDao;
 
     @Override
     public User findByUsername(String username) {
@@ -131,5 +136,41 @@ public class UserServiceImpl implements UserService{
                 userDao.setRoleAndPermission(map);
             }
         }
+    }
+
+    /**
+     * @description: 根据用户名查询菜单
+     * @author: QIXIANG LING
+     * @date: 2020/7/8 10:00
+     * @param: username
+     * @return: java.util.List<com.itheima.health.pojo.Role>
+     *     获取用户所拥有的菜单列表  menuList
+     *     用户所拥有的一级菜单列表 menuFirst
+     */
+    @Override
+    public List<Menu> getMenu(String username) {
+        // 查询用户所拥有的角色列表
+        List<Role> roleList = userDao.findRole(username);
+        List<Menu> menuList = new ArrayList<>();
+        // 遍历获取每个用户所拥有的角色, 在查出每个角色所拥有的菜单列表,再遍历出来存到列表中
+        for (Role role : roleList) {
+            List<Menu> list = menuDao.findMenu(role);
+            // 获取用户所拥有的菜单列表
+            for (Menu menu : list) {
+                menuList.add(menu);
+            }
+        }
+        // menuList 就是用户所拥有的菜单; 查出一级菜单 menuFirst
+        List<Menu> menuFirst = new ArrayList<>();
+        for (Menu menu : menuList) {
+            // 如果没有parentMenuid; 就查询它的子菜单
+            if(null == menu.getParentMenuId()){
+                List<Menu> childrenMenu = menuDao.findByParentId(menu.getId());
+                menu.setChildren(childrenMenu);
+                menuFirst.add(menu);
+            }
+        }
+        return menuFirst;
+
     }
 }

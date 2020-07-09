@@ -20,4 +20,6 @@ public interface RoleService {
     void update(Map<String, Object> map);
 
     void deleteById(Integer id) throws HealthException;
+
+    List<Role> findAll();
 }

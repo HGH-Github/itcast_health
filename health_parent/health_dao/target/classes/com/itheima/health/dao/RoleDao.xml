@@ -80,4 +80,20 @@
         select count(1) from t_user_role where role_id=#{value}
     </select>
 
+    <resultMap id="menuMap" type="com.itheima.health.pojo.Menu">
+        <id column="id" property="id"></id>
+        <result column="name" property="name"></result>
+        <collection property="children" ofType="com.itheima.health.pojo.Menu">
+            <id column="id2" property="id"></id>
+            <result column="name2" property="name"></result>
+        </collection>
+    </resultMap>
+
+    <select id="findAllWithMenu2" resultMap="menuMap">
+            SELECT t1.id id,t1.name NAME,t2.id id2,t2.name name2 FROM t_menu t1,t_menu t2 WHERE t1.id = t2.parentMenuId
+    </select>
+
+    <select id="findAll" resultType="com.itheima.health.pojo.Role">
+        select * from t_role
+    </select>
 </mapper>

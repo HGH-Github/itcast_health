@@ -1,6 +1,7 @@
 package com.itheima.health.service;
 
 import com.itheima.health.entity.PageResult;
+import com.itheima.health.pojo.Menu;
 import com.itheima.health.pojo.User;
 
 import java.util.List;
@@ -25,4 +26,6 @@ public interface UserService {
     void edit(User user, Integer[] roleIds);
 
     void deleteById(Integer id);
+
+    List<Menu> getMenu(String username);
 }

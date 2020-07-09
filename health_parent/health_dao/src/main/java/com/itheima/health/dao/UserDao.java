@@ -3,6 +3,7 @@ package com.itheima.health.dao;
 import com.github.pagehelper.Page;
 import com.itheima.health.pojo.CheckItem;
 import com.itheima.health.pojo.Menu;
+import com.itheima.health.pojo.Role;
 import com.itheima.health.pojo.User;
 
 import java.util.List;
@@ -33,4 +34,6 @@ public interface UserDao {
     void removeUserAndRole(Integer id);
 
     void deleteById(Integer id);
+
+    List<Role> findRole(String username);
 }

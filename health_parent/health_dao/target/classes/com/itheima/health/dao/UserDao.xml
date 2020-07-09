@@ -117,4 +117,11 @@
     <delete id="deleteById" parameterType="int">
         delete from t_user where id = #{id};
     </delete>
+
+    <!--查询用户所拥有的角色-->
+    <select id="findRole" resultType="Role" parameterType="string">
+        select tr.*
+        from t_user tu ,t_user_role tur, t_role tr
+        where username = #{name} and tu.id = tur.user_id and tur.role_id = tr.id;
+    </select>
 </mapper>

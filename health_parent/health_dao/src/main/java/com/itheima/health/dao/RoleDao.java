@@ -47,4 +47,8 @@ public interface RoleDao {
     Integer findUserWithRole(Integer id);
 
     void deleteRole(Integer id);
+
+    List<Menu> findAllWithMenu2();
+
+    List<Role> findAll();
 }

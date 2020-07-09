@@ -12,6 +12,7 @@ import com.itheima.health.service.UserService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -123,4 +124,16 @@ public class UserController {
         }
     }
 
+    /**
+     * @description: 根据用户名去获取用户所拥有的菜单;用于动态展示
+     * @author: QIXIANG LING
+     * @date: 2020/7/8 9:37
+     * @param: null
+     * @return:
+     */
+    @GetMapping("/findMenuByLoginUsername")
+    public Result findMenuByLoginUsername(String loginUsername){
+        List<Menu> menuList = userService.getMenu(loginUsername);
+        return new Result(true, "根据用户名查询菜单成功",menuList);
+    }
 }

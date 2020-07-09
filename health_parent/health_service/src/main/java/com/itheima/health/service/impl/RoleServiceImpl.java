@@ -55,7 +55,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Map<String, Object> findAllWithMenuAndPermission() {
-        List<Menu> menuList = roleDao.findAllWithMenu();
+        List<Menu> menuList = roleDao.findAllWithMenu2();
         List<Permission> permissionList = roleDao.findAllWithPermission();
         Map<String,Object> map = new HashMap<> (  );
         map.put ( "menuList",menuList );
@@ -144,5 +144,11 @@ public class RoleServiceImpl implements RoleService {
           roleDao.deleteRoleWithMenuById ( id);
           roleDao.deleteRoleWithPermissionById ( id );
           roleDao.deleteRole(id);
+    }
+
+    @Override
+    public List<Role> findAll() {
+        List<Role> roleList=roleDao.findAll();
+        return roleList;
     }
 }

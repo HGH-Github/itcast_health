@@ -44,7 +44,6 @@ public class ClearImgJob {
         // 删除redis上的图片, 两边的图片已经同步了
         jedis.del(RedisConstant.SETMEAL_PIC_RESOURCES, RedisConstant.SETMEAL_PIC_DB_RESOURCES);
     }
-
     /**
      * 每月最后一天凌晨两点定时清理
      */
